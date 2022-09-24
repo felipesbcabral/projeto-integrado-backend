@@ -8,6 +8,7 @@ const swaggerDocument = require('./swagger.json');
 var indexRouter = require('./src/routes/index');
 var routerCharges = require('./src/routes/chargesRouter');
 var routerBalance = require('./src/routes/balanceRouter');
+var routerUsers = require('./src/routes/usersRouter');
 
 var app = express();
 
@@ -16,6 +17,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', indexRouter);
 app.use('/cobranca', routerCharges);
 app.use('/saldo', routerBalance);
+app.use('/login', routerUsers);
 
 
 module.exports = app;
