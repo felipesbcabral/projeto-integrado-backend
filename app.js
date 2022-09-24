@@ -11,12 +11,8 @@ var routerBalance = require('./src/routes/balanceRouter');
 
 var app = express();
 
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 app.use('/', indexRouter);
 app.use('/cobranca', routerCharges);
 app.use('/saldo', routerBalance);
