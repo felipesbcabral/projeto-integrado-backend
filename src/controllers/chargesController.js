@@ -1,34 +1,37 @@
 const createError = require('http-errors');
 
-const boletos = [
+const contas = [
     {
-        "mensalidade": "01",
-        "vencimento": "01/01/2022",
-        "valor": "500.00",
+        "id": "01",
+        "Cobranca": "Academia",
+        "Data de vencimentos": "10/10/2022",
+        "valor": "100.00",
+        "situacao": "Pendente",
+    },
+    {
+        "id": "02",
+        "Cobranca": "Faculdade",
+        "vencimento": "07/09/2022",
+        "valor": "467.00",
         "situacao": "Pago",
     },
     {
-        "mensalidade": "02",
-        "vencimento": "01/02/2022",
-        "valor": "500.00",
-        "situacao": "Pago",
-    },
-    {
-        "mensalidade": "03",
-        "vencimento": "01/03/2022",
-        "valor": "500.00",
+        "id": "03",
+        "Cobranca": "Netflix",
+        "vencimento": "05/09/2022",
+        "valor": "60.00",
         "situacao": "Em Atraso",
     },
 ];
 
-function listarBoletos (req, res, next) {
-    res.json(boletos);
+function listarContas (req, res, next) {
+    res.json(contas);
 }
 
-function listarBoletosPorId (req, res, next) {
+function listarContasPorId (req, res, next) {
     const id = Number(req.params.id);
-    if (id > boletos.length) return next(createError(404, "Boleto não localizado!"));
-    res.json(boletos[id]);
+    if (id > contas.length) return next(createError(404, "Boleto não localizado!"));
+    res.json(contas[id]);
 }
 
-module.exports = { listarBoletos, listarBoletosPorId };
+module.exports = { listarContas, listarContasPorId };

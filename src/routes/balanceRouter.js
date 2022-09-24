@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const faltasController = require('../controllers/faltasController');
+const balanceController = require('../controllers/balanceController');
 
 const app = express();
 
-router.get('/', faltasController.listarFaltas );
+router.get('/', balanceController.listarFaltas );
 
 module.exports = router;
