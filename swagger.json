@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Aluno Online API",
+        "description": "API Rest das funcionalidades do Aluno Online",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/notas": {
+            "description": "Notas do Aluno Online",
+            "get": {
+                "description": "Lista as notas de um aluno",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notas"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/boletos": {},
+        "boletos/{id}": {},
+        "/requerimentos": {},
+        "requerimentos/{id}": {}
+    },
+    "components": {
+        "schemas": {
+            "Notas": {
+                "type": "object",
+                "properties": {
+                    "periodo": {
+                        "type": "object",
+                        "example": "2021/1"
+                    },
+                    "disciplina": {
+                        "properties": {
+                            "codigo": {
+                                "type": "string",
+                                "example": "ADS030"
+                            },
+                            "nome": {
+                                "type": "string",
+                                "example": "Manutenção de software"
+                            }
+                        }
+                    },
+                    "a1": {
+                        "type": "string",
+                        "example": "5.2"
+                    },
+                    "a2": {
+                        "type": "string",
+                        "example": "3.2"
+                    },
+                    "a3": {
+                        "type": "string",
+                        "example": "3.1"
+                    },
+                    "media": {
+                        "type": "string",
+                        "example": "5.0"
+                    }
+                }
+            }
+        }
+    }
+}
