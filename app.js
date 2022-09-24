@@ -18,8 +18,8 @@ app.use(cookieParser());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', indexRouter);
-app.use('/boletos', routerBoletos);
-app.use('/faltas', routerFaltas);
+app.use('/cobranca', routerBoletos);
+app.use('/saldo', routerFaltas);
 
 
 module.exports = app;

@@ -1,23 +1,33 @@
 const createError = require('http-errors');
 
-const faltas = [
+const saldo = [
     {
-        "periodo": "2021/1",
-        "disciplina": { "codigo": "ADS030", "nome": "Manutenção de Software e DevOps" },
-        "total": "0",
-        "porcentagem": "0",
+        "id": 1,
+        "Nome": "Dutra",
+        "Saldo": "1000.00",
     },
     {
-        "periodo": "2021/1",
-        "disciplina": { "codigo": "ADS032", "nome": "Construção de Frontend" },
-        "total": "18",
-        "porcentagem": "15",
-    },
+        "id": 2,
+        "Nome": "Cabral",
+        "Saldo": "1020.00",
+    }
 
+  
 ];
 
 function listarFaltas (req, res, next) {
-    res.json(faltas);
+    res.json(saldo);
+}
+function listarSaldoPorNome (req, res, next) {
+    const localizar = saldo.find(item => 
+        item.id === Number(req.params.id)
+        );
+        if(!localizar) {
+            return res.status(404).json({msg:"Saldo nao localizado"});
+        }
+    res.json(localizar);
 }
 
-module.exports = { listarFaltas };
+
+
+module.exports = { listarFaltas, listarSaldoPorNome };
