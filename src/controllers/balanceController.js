@@ -31,7 +31,7 @@ function atualizarSaldo(req, res, next) {
     return res.status(404).json({ msg: "Saldo não localizado" });
   }
   localizar.Saldo = req.body.saldo;
-  res.status(204).end();
+  res.status(200).json({ msg: "Saldo atualizado com sucesso" });
 }
 
 module.exports = { listarSaldo, listarSaldoPorNome, atualizarSaldo };
