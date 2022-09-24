@@ -46,7 +46,7 @@ function atualizarCobrancaPorId(req, res, next) {
     localizar.vencimento = req.body.vencimento;
     localizar.valor = req.body.valor;
     localizar.situacao = req.body.situacao;
-    res.status(204).end();
+    res.status(200).json({ msg: "Cobrança atualizado com sucesso" });
   }
   function criarCobranca (req, res, next){
     const novaCobranca  = {
