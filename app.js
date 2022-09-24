@@ -22,6 +22,4 @@ app.use('/boletos', routerBoletos);
 app.use('/faltas', routerFaltas);
 
 
-
-
 module.exports = app;
