@@ -4,11 +4,11 @@ const chargesController = require('../controllers/chargesController');
 
 const app = express();
 
-router.get('/', chargesController.listarContas );
+router.get('/', chargesController.listarCobranca );
 
-router.get('/:id', chargesController.listarContasPorId );
+router.get('/:id', chargesController.listarCobrancaPorId );
 
-router.put('/:id',chargesController.atualizarContaPorId);
+router.put('/:id',chargesController.atualizarCobrancaPorId);
 
 router.post('/', chargesController.criarCobranca);
 

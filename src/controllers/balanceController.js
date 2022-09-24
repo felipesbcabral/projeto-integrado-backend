@@ -13,7 +13,7 @@ const saldo = [
   },
 ];
 
-function listarFaltas(req, res, next) {
+function listarSaldo(req, res, next) {
   res.json(saldo);
 }
 function listarSaldoPorNome(req, res, next) {
@@ -34,4 +34,4 @@ function atualizarSaldo(req, res, next) {
   res.status(204).end();
 }
 
-module.exports = { listarFaltas, listarSaldoPorNome, atualizarSaldo };
+module.exports = { listarSaldo, listarSaldoPorNome, atualizarSaldo };
