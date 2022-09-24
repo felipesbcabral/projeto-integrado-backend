@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const boletosController = require('../controllers/chargesController');
+const chargesController = require('../controllers/chargesController');
 
 const app = express();
 
-router.get('/', boletosController.listarBoletos );
+router.get('/', chargesController.listarContas );
 
-router.get('/:id', boletosController.listarBoletosPorId );
+router.get('/:id', chargesController.listarContasPorId );
 
 module.exports = router;
