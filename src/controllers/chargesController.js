@@ -24,18 +24,18 @@ const cobranca = [
   },
 ];
 
-function listarContas(req, res, next) {
+function listarCobranca(req, res, next) {
   res.json(cobranca);
 }
 
-function listarContasPorId(req, res, next) {
+function listarCobrancaPorId(req, res, next) {
   const localizar = cobranca.find((item) => item.id === Number(req.params.id));
   if (!localizar) {
     return res.status(404).json({ msg: "Cobrança não localizada" });
   }
   res.json(localizar);
 }
-function atualizarContaPorId(req, res, next) {
+function atualizarCobrancaPorId(req, res, next) {
     const localizar = cobranca.find(
       (cobranca) => cobranca.id === Number(req.params.id)
     );
@@ -69,4 +69,4 @@ function deletarCobranca (req, res, next) {
     res.status(200).json({msg:"Cobrança excluida com sucesso"});
 }
 
-module.exports = { listarContas, listarContasPorId, atualizarContaPorId, criarCobranca, deletarCobranca };
+module.exports = { listarCobranca, listarCobrancaPorId, atualizarCobrancaPorId, criarCobranca, deletarCobranca };
