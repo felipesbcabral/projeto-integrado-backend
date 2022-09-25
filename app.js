@@ -12,15 +12,18 @@ var routerUsers = require('./src/routes/usersRouter');
 
 var app = express();
 
-
 app.use(express.json());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/wallets-manager', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', indexRouter);
 app.use('/cobranca', routerCharges);
 app.use('/saldo', routerBalance);
 app.use('/login', routerUsers);
+app.use('/criar', routerCharges);
+app.use('/atualizar', routerCharges);
+app.use('/deletar', routerCharges);
+app.use('/atualizar', routerBalance);
 
 
 module.exports = app;

@@ -1,27 +1,216 @@
 {
     "openapi": "3.0.3",
     "info": {
-        "title": "Aluno Online API",
-        "description": "API Rest das funcionalidades do Aluno Online",
+        "title": "Wallets Manager",
+        "description": "API Rest de controle de finanças",
         "version": "0.0.1"
     },
-    "servers": [
-        {
-            "url": "http://localhost:3000"
-        }
-    ],
     "paths": {
-        "/notas": {
-            "description": "Notas do Aluno Online",
+        "/cobranca": {
+            "description": "Listar cobranca",
             "get": {
-                "description": "Lista as notas de um aluno",
+                "description": "Lista uma cobrança",
                 "responses": {
                     "200": {
                         "description": "Sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Notas"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cobrança"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não encontrado"
+                    }
+                }
+            }
+        },
+        "/cobranca/{id}": {
+            "get": {
+                "description": "Exibe uma cobranca pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cobrança"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não encontrado"
+                    }
+                }
+            }
+        },
+        "/criar/cobranca": {
+            "post": {
+                "description": "Cria uma Cobrança",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cobranca"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cobrança criada",
+                        "content": {}
+                    }
+                }
+             } 
+     },
+        "/atualizar/cobranca/{id}": {
+            "put": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "description": "Atualizar uma cobrança",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cobranca"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Conta atualizada com sucesso",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/deletar/cobranca/{id}": {
+            "delete": {
+                "description": "Deleta uma cobranca pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Conta deletada",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/saldo": {
+            "description": "Listar cobranca",
+            "get": {
+                "description": "Lista uma cobrança",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/saldo"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não encontrado"
+                    }
+                }
+            }
+        },
+        "/saldo/{id}": {
+            "get": {
+                "description": "Exibe uma cobranca pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/saldo"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não encontrado"
+                    }
+                }
+            }
+        },
+        "/atualizar/saldo/{id}": {
+            "put": {
+                "description": "Exibe uma cobranca pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/saldo"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/saldo"
                                 }
                             }
                         }
@@ -29,47 +218,94 @@
                 }
             }
         },
-        "/boletos": {},
-        "boletos/{id}": {},
-        "/requerimentos": {},
-        "requerimentos/{id}": {}
+        "/login": {
+            "put": {
+                "description": "Exibe uma cobranca pelo ID",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario logado com sucesso",
+                        "content": {}
+                    }
+                }
+            }
+        }
     },
     "components": {
         "schemas": {
-            "Notas": {
+            "criarCobrança": {
                 "type": "object",
                 "properties": {
-                    "periodo": {
-                        "type": "object",
-                        "example": "2021/1"
-                    },
-                    "disciplina": {
-                        "properties": {
-                            "codigo": {
-                                "type": "string",
-                                "example": "ADS030"
-                            },
-                            "nome": {
-                                "type": "string",
-                                "example": "Manutenção de software"
-                            }
-                        }
-                    },
-                    "a1": {
+                    "cobranca": {
                         "type": "string",
-                        "example": "5.2"
+                        "example": "Academia"
                     },
-                    "a2": {
+                    "vencimento": {
                         "type": "string",
-                        "example": "3.2"
+                        "example": "07/09/2022"
                     },
-                    "a3": {
+                    "valor": {
                         "type": "string",
-                        "example": "3.1"
+                        "example": "100.0"
                     },
-                    "media": {
+                    "situacao": {
                         "type": "string",
-                        "example": "5.0"
+                        "example": "Pendente"
+                    }
+                }
+            },
+            "Cobrança": {
+                "type": "object",
+                "properties": {
+                    "cobranca": {
+                        "type": "string",
+                        "example": "Academia"
+                    },
+                    "vencimento": {
+                        "type": "string",
+                        "example": "07/09/2022"
+                    },
+                    "valor": {
+                        "type": "string",
+                        "example": "100.0"
+                    },
+                    "situacao": {
+                        "type": "string",
+                        "example": "Pendente"
+                    }
+                }
+            },
+            "saldo": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "Cabral"
+                    },
+                    "saldo": {
+                        "type": "string",
+                        "example": "1020.00"
+                    }
+                }
+            },
+            "login": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "Felipe"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "12345678"
                     }
                 }
             }

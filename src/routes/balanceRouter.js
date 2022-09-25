@@ -8,7 +8,7 @@ router.get('/', balanceController.listarSaldo);
 
 router.get('/:id', balanceController.listarSaldoPorNome);
 
-router.put('/:id',balanceController.atualizarSaldo);
+router.put('/saldo/:id',balanceController.atualizarSaldo);
 
 
 module.exports = router;
