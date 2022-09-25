@@ -8,10 +8,10 @@ router.get('/', chargesController.listarCobranca );
 
 router.get('/:id', chargesController.listarCobrancaPorId );
 
-router.put('/:id',chargesController.atualizarCobrancaPorId);
+router.put('/cobranca/:id',chargesController.atualizarCobrancaPorId);
 
-router.post('/', chargesController.criarCobranca);
+router.post('/cobranca', chargesController.criarCobranca);
 
-router.delete('/:id', chargesController.deletarCobranca);
+router.delete('/cobranca/:id', chargesController.deletarCobranca);
 
 module.exports = router;
