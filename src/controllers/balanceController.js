@@ -3,13 +3,13 @@ const createError = require("http-errors");
 const saldo = [
   {
     id: 1,
-    Nome: "Dutra",
-    Saldo: "1000.00",
+    nome: "Dutra",
+    saldo: "1000.00",
   },
   {
     id: 2,
-    Nome: "Cabral",
-    Saldo: "1020.00",
+    nome: "Cabral",
+    saldo: "1020.00",
   },
 ];
 
@@ -30,7 +30,7 @@ function atualizarSaldo(req, res, next) {
   if (!localizar) {
     return res.status(404).json({ msg: "Saldo não localizado" });
   }
-  localizar.Saldo = req.body.saldo;
+  localizar.saldo = req.body.saldo;
   res.status(200).json({ msg: "Saldo atualizado com sucesso" });
 }
 
