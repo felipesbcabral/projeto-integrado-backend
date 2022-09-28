@@ -17,20 +17,20 @@ function listarSaldo(req, res, next) {
   res.json(saldo);
 }
 function listarSaldoPorNome(req, res, next) {
-  const localizar = saldo.find((item) => item.id === Number(req.params.id));
-  if (!localizar) {
+  const buscar = saldo.find((item) => item.id === Number(req.params.id));
+  if (!buscar) {
     return res.status(404).json({ msg: "Saldo nao localizado" });
   }
-  res.json(localizar);
+  res.json(buscar);
 }
 function atualizarSaldo(req, res, next) {
-  const localizar = saldo.find(
+  const buscar = saldo.find(
     (saldo) => saldo.id === Number(req.params.id)
   );
-  if (!localizar) {
+  if (!buscar) {
     return res.status(404).json({ msg: "Saldo não localizado" });
   }
-  localizar.saldo = req.body.saldo;
+  buscar.saldo = req.body.saldo;
   res.status(200).json({ msg: "Saldo atualizado com sucesso" });
 }
 

@@ -29,23 +29,23 @@ function listarCobranca(req, res, next) {
 }
 
 function listarCobrancaPorId(req, res, next) {
-  const localizar = cobranca.find((item) => item.id === Number(req.params.id));
-  if (!localizar) {
+  const buscar = cobranca.find((item) => item.id === Number(req.params.id));
+  if (!buscar) {
     return res.status(404).json({ msg: "Cobrança não localizada" });
   }
-  res.json(localizar);
+  res.json(buscar);
 }
 function atualizarCobrancaPorId(req, res, next) {
-    const localizar = cobranca.find(
+    const buscar = cobranca.find(
       (cobranca) => cobranca.id === Number(req.params.id)
     );
-    if (!localizar) {
+    if (!buscar) {
         return res.status(404).json({ msg: "Cobrança não localizada" });
     }
-    localizar.cobranca = req.body.cobranca;
-    localizar.vencimento = req.body.vencimento;
-    localizar.valor = req.body.valor;
-    localizar.situacao = req.body.situacao;
+    buscar.cobranca = req.body.cobranca;
+    buscar.vencimento = req.body.vencimento;
+    buscar.valor = req.body.valor;
+    buscar.situacao = req.body.situacao;
     res.status(200).json({ msg: "Cobrança atualizado com sucesso" });
   }
   function criarCobranca (req, res, next){
@@ -61,11 +61,11 @@ function atualizarCobrancaPorId(req, res, next) {
 }
 
 function deletarCobranca (req, res, next) {
-    const localizar = cobranca.findIndex(cobranca => cobranca.id === Number(req.params.id));
-    if(localizar < 0){
+    const buscar = cobranca.findIndex(cobranca => cobranca.id === Number(req.params.id));
+    if(buscar < 0){
             return res.status(404).json({msg:"Cobrança inexistente"});
     }
-    cobranca.splice(localizar, 1);
+    cobranca.splice(buscar, 1);
     res.status(200).json({msg:"Cobrança excluida com sucesso"});
 }
 
