@@ -5,9 +5,11 @@
         "description": "API Rest de controle de finanças",
         "version": "0.0.1"
     },
+    
     "paths": {
         "/cobranca": {
             "description": "Listar cobranca",
+            
             "get": {
                 "description": "Lista uma cobrança",
                 "responses": {
@@ -67,7 +69,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cobranca"
+                                "$ref": "#/components/schemas/Cobrança"
                             }
                         }
                     }
@@ -97,7 +99,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Cobranca"
+                                "$ref": "#/components/schemas/Cobrança"
                             }
                         }
                     }
@@ -241,27 +243,6 @@
     },
     "components": {
         "schemas": {
-            "criarCobrança": {
-                "type": "object",
-                "properties": {
-                    "cobranca": {
-                        "type": "string",
-                        "example": "Academia"
-                    },
-                    "vencimento": {
-                        "type": "string",
-                        "example": "07/09/2022"
-                    },
-                    "valor": {
-                        "type": "string",
-                        "example": "100.0"
-                    },
-                    "situacao": {
-                        "type": "string",
-                        "example": "Pendente"
-                    }
-                }
-            },
             "Cobrança": {
                 "type": "object",
                 "properties": {
