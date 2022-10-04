@@ -70,3 +70,4 @@ function deletarCobranca (req, res, next) {
 }
 
 module.exports = { listarCobranca, listarCobrancaPorId, atualizarCobrancaPorId, criarCobranca, deletarCobranca };
+
