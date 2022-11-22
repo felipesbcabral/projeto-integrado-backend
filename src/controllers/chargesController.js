@@ -1,73 +1,57 @@
-const createError = require("http-errors");
+const { ObjectId } = require('bson');
+const Cobranca = require('../models/chargesModel');
 
-const cobranca = [
-  {
-    id: 1,
-    cobranca: "Academia",
-    vencimento: "07/09/2022",
-    valor: "100.00",
-    situacao: "Pendente",
-  },
-  {
-    id: 2,
-    cobranca: "Faculdade",
-    vencimento: "07/09/2022",
-    valor: "467.00",
-    situacao: "Pago",
-  },
-  {
-    id: 3,
-    cobranca: "Metflix",
-    vencimento: "05/09/2022",
-    valor: "60.00",
-    situacao: "Em Atraso",
-  },
-];
-
-function listarCobranca(req, res, next) {
-  res.json(cobranca);
+async function criarCobranca(req, res) {
+  const cobranca = new Cobranca(req.body);
+  const erros = []
+   await cobranca.save()
+   .then(doc => {
+      console.log(doc)
+      return res.status(201).end();
+  })
+   .catch(error => {
+     const msgErro = {};
+      Object.values(error.errors).forEach(({properties}) =>{
+          msgErro[properties.path] = properties.message;
+      });
+      return res.status(422).json(msgErro);
+  });
 }
 
-function listarCobrancaPorId(req, res, next) {
-  const buscar = cobranca.find((item) => item.id === Number(req.params.id));
-  if (!buscar) {
-    return res.status(404).json({ msg: "Cobrança não localizada" });
-  }
-  res.json(buscar);
-}
-function atualizarCobrancaPorId(req, res, next) {
-    const buscar = cobranca.find(
-      (cobranca) => cobranca.id === Number(req.params.id)
-    );
-    if (!buscar) {
-        return res.status(404).json({ msg: "Cobrança não localizada" });
-    }
-    buscar.cobranca = req.body.cobranca;
-    buscar.vencimento = req.body.vencimento;
-    buscar.valor = req.body.valor;
-    buscar.situacao = req.body.situacao;
-    res.status(200).json({ msg: "Cobrança atualizado com sucesso" });
-  }
-  function criarCobranca (req, res, next){
-    const novaCobranca  = {
-    id: cobranca[cobranca.length-1].id + 1,
-    cobranca: req.body.cobranca,
-    vencimento: req.body.vencimento,
-    valor: req.body.valor,
-    situacao: req.body.situacao,
-    }
-    cobranca.push(novaCobranca);
-    res.status(201).json(novaCobranca);
+async function listarCobranca(req, res) {
+  await Cobranca.find({})
+  .then(cobranca => {return res.json(cobranca);})
+  .catch(error => {return res.status(500).json({error}); });
 }
 
-function deletarCobranca (req, res, next) {
-    const buscar = cobranca.findIndex(cobranca => cobranca.id === Number(req.params.id));
-    if(buscar < 0){
-            return res.status(404).json({msg:"Cobrança inexistente"});
-    }
-    cobranca.splice(buscar, 1);
-    res.status(200).json({msg:"Cobrança excluida com sucesso"});
+async function listarCobrancaPorId(req, res) {
+  await Cobranca.findOne({_id: ObjectId(req.params.id)})
+  .then(cobranca => {
+      if(cobranca) return res.json(cobranca);
+      else return res.status(404).json('Cobrança nao localizado')
+  })
+  .catch(error => {return res.status(500).json({error}); });
 }
+
+async function atualizarCobrancaPorId(req, res) {
+  await Cobranca.findOneAndUpdate({_id: ObjectId(req.params.id)}, req.body,
+  {runValidators: true})
+  .then(cobranca => {
+      if(cobranca) return res.status(204).end();
+      else return res.status(404).json('Cobrança atualizado com sucesso!')
+  })
+  .catch(error => {return res.status(500).json({error}); });
+}
+
+async function deletarCobranca(req, res) {
+  await Cobranca.findOneAndDelete({_id: ObjectId(req.params.id)})
+  .then(cobranca => {
+      if(cobranca) return res.status(204).end();
+      else return res.status(404).json('Cobrança deletado com sucesso!')
+  })
+  .catch(error => {return res.status(500).json({error}); });
+}
+
 
 module.exports = { listarCobranca, listarCobrancaPorId, atualizarCobrancaPorId, criarCobranca, deletarCobranca };
 

@@ -1,9 +1,8 @@
 var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const mongoose = require('mongoose');
+const config = require('./config/env.json')
 
 var indexRouter = require('./src/routes/indexRoutes');
 var routerCharges = require('./src/routes/chargesRouter');
@@ -21,9 +20,17 @@ app.use('/cobranca', routerCharges);
 app.use('/saldo', routerBalance);
 app.use('/login', routerUsers);
 app.use('/criar', routerCharges);
+app.use('/criar', routerBalance);
 app.use('/atualizar', routerCharges);
 app.use('/deletar', routerCharges);
 app.use('/atualizar', routerBalance);
 
+mongoose.connect(config.url)
+    .then(app.listen(config.porta,() =>{
+        console.log('API esta truvando meno')
+    }))
+    .catch(error =>{
+        console.log('Confere essa poha meno', error.message);
+    });
 
 module.exports = app;
