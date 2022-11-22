@@ -1,0 +1,195 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Aluno Online API",
+        "description": "API Rest das funcionalidades do Aluno Online",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/notas": {
+            "description": "Notas do Aluno Online",
+            "get": {
+                "description": "Lista as notas de um aluno",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Notas"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/faltas": {},
+        "/boletos": {},
+        "/boletos/{id}": {
+            "get": {
+                "description": "Exibe um boleto pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Boletos"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não encontrado"
+                    }
+                }
+            }
+        },
+        "/requerimentos": {
+            "description": "Requerimentos do Aluno Online",
+            "post": {
+                "description": "Cria um requerimento",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Requerimentos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Requerimento criado",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/requerimentos/{id}": {}
+    },
+    "components": {
+        "schemas": {
+            "Notas": {
+                "type": "object",
+                "properties": {
+                    "periodo": {
+                        "type": "string",
+                        "example": "2021/1"
+                    },
+                    "disciplina": {
+                        "type": "object",
+                        "properties": {
+                            "codigo": {
+                                "type": "string",
+                                "example": "ADS030"
+                            },
+                            "nome": {
+                                "type": "string",
+                                "example": "Manutenção de Software e DevOps"
+                            }
+                        }
+                    },
+                    "a1": {
+                        "type": "string",
+                        "example": "5.2"
+                    },
+                    "a2": {
+                        "type": "string",
+                        "example": "3.8"
+                    },
+                    "a3": {
+                        "type": "string",
+                        "example": "4.8"
+                    },
+                    "media": {
+                        "type": "string",
+                        "example": "5.0"
+                    }
+                }
+            },
+            "Boletos": {
+                "type": "object",
+                "properties": {
+                    "periodo": {
+                        "type": "string",
+                        "example": "2021/1"
+                    },
+                    "disciplina": {
+                        "type": "object",
+                        "properties": {
+                            "codigo": {
+                                "type": "string",
+                                "example": "ADS030"
+                            },
+                            "nome": {
+                                "type": "string",
+                                "example": "Manutenção de Software e DevOps"
+                            }
+                        }
+                    },
+                    "a1": {
+                        "type": "string",
+                        "example": "5.2"
+                    },
+                    "a2": {
+                        "type": "string",
+                        "example": "3.8"
+                    },
+                    "a3": {
+                        "type": "string",
+                        "example": "4.8"
+                    },
+                    "media": {
+                        "type": "string",
+                        "example": "5.0"
+                    }
+                }
+            },
+            "Requerimentos": {
+                "type": "object",
+                "properties": {
+                    "disciplina": {
+                        "type": "object",
+                        "properties": {
+                            "codigo": {
+                                "type": "string",
+                                "example": "ADS028"
+                            },
+                            "disciplina": {
+                                "type": "string",
+                                "example": "Construção de Backend"
+                            }
+                        }
+                    },
+                    "periodo": {
+                        "type": "string",
+                        "example": "2022/1"
+                    },
+                    "prova": {
+                        "type": "string",
+                        "example": "A1"
+                    },
+                    "argumentacao": {
+                        "type": "string",
+                        "example": "Seu argumento aqui!"
+                    }
+                }
+            }
+        }
+    }
+}
