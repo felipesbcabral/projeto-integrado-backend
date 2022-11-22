@@ -1,37 +1,46 @@
-const createError = require("http-errors");
+const { ObjectId } = require('bson');
+const Saldo = require('../models/balanceModel');
 
-const saldo = [
-  {
-    id: 1,
-    nome: "Dutra",
-    saldo: "1000.00",
-  },
-  {
-    id: 2,
-    nome: "Cabral",
-    saldo: "1020.00",
-  },
-];
-
-function listarSaldo(req, res, next) {
-  res.json(saldo);
-}
-function listarSaldoPorNome(req, res, next) {
-  const buscar = saldo.find((item) => item.id === Number(req.params.id));
-  if (!buscar) {
-    return res.status(404).json({ msg: "Saldo nao localizado" });
-  }
-  res.json(buscar);
-}
-function atualizarSaldo(req, res, next) {
-  const buscar = saldo.find(
-    (saldo) => saldo.id === Number(req.params.id)
-  );
-  if (!buscar) {
-    return res.status(404).json({ msg: "Saldo não localizado" });
-  }
-  buscar.saldo = req.body.saldo;
-  res.status(200).json({ msg: "Saldo atualizado com sucesso" });
+async function listarSaldo(req, res) {
+  await Saldo.find({})
+  .then(saldo => {return res.json(saldo);})
+  .catch(error => {return res.status(500).json({error}); });
 }
 
-module.exports = { listarSaldo, listarSaldoPorNome, atualizarSaldo };
+async function listarSaldoPorNome(req, res) {
+  await Saldo.findOne({_id: ObjectId(req.params.id)})
+  .then(saldo => {
+      if(saldo) return res.json(saldo);
+      else return res.status(404).json('Saldo nao localizado')
+  })
+  .catch(error => {return res.status(500).json({error}); });
+}
+
+async function atualizarSaldo(req, res) {
+  await Saldo.findOneAndUpdate({_id: ObjectId(req.params.id)}, req.body,
+  {runValidators: true})
+  .then(saldo => {
+      if(saldo) return res.status(204).end();
+      else return res.status(404).json('Saldo atualizado com sucesso!')
+  })
+  .catch(error => {return res.status(500).json({error}); });
+}
+
+async function criarSaldo(req, res) {
+  const saldo = new Saldo(req.body);
+  const erros = []
+   await saldo.save()
+   .then(doc => {
+      console.log(doc)
+      return res.status(201).end();
+  })
+   .catch(error => {
+     const msgErro = {};
+      Object.values(error.errors).forEach(({properties}) =>{
+          msgErro[properties.path] = properties.message;
+      });
+      return res.status(422).json(msgErro);
+  });
+}
+
+module.exports = { listarSaldo, listarSaldoPorNome, atualizarSaldo, criarSaldo };
