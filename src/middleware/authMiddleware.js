@@ -5,7 +5,7 @@ module.exports = async function(req, res, next){
     const { authorization } = req.headers;
 
     if (!authorization) {
-        return res.status(401).json({ msg: "Num vai subir ninguem" });
+        return res.status(401).json({ msg: "Necessario autenticação via Token" });
     }
 
     const [tipo, token] = authorization.split(' ');

@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const chargesController = require('../controllers/chargesController');
+const autentica = require('../middleware/authMiddleware')
 
 const app = express();
 
-router.get('/cobranca', chargesController.listarCobranca );
+router.get('/cobranca', autentica, chargesController.listarCobranca );
 
-router.get('/cobranca/:id', chargesController.listarCobrancaPorId );
+router.get('/cobranca/:id', autentica, chargesController.listarCobrancaPorId );
 
-router.put('/cobranca/:id',chargesController.atualizarCobrancaPorId);
+router.put('/cobranca/:id', autentica,chargesController.atualizarCobrancaPorId);
 
-router.post('/cobranca/criar', chargesController.criarCobranca);
+router.post('/cobranca/criar', autentica, chargesController.criarCobranca);
 
-router.delete('/cobranca/:id', chargesController.deletarCobranca);
+router.delete('/cobranca/:id', autentica, chargesController.deletarCobranca);
 
 module.exports = router;
