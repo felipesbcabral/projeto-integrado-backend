@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../config/env.json');
+const config = require('../config/env.json')
 async function registrar(req, res) {
 
     const user = new User(req.body);
@@ -39,6 +39,7 @@ async function login(req, res) {
         return res.json({email, token});
     })
     .catch(error => {
+        console.log(error)
         return res.status(500).json(error);
     }) 
 }
