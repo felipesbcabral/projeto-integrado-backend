@@ -4,9 +4,9 @@ const balanceController = require('../controllers/balanceController');
 
 const app = express();
 
-router.get('/', balanceController.listarSaldo);
+router.get('/saldo', balanceController.listarSaldo);
 
-router.get('/:id', balanceController.listarSaldoPorNome);
+router.get('/saldo/:id', balanceController.listarSaldoPorNome);
 
 router.put('/saldo/:id',balanceController.atualizarSaldo);
 
