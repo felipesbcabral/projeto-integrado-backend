@@ -19,11 +19,7 @@ app.use('/', indexRouter);
 app.use('/', routerCharges);
 app.use('/', routerBalance);
 app.use('/', routerUsers);
-app.use('/', routerCharges);
-app.use('/', routerBalance);
-app.use('/', routerCharges);
-app.use('/', routerCharges);
-app.use('/', routerBalance);
+
 
 mongoose.connect(config.url)
     .then(app.listen(config.porta,() =>{
