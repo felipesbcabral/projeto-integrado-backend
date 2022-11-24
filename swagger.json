@@ -362,7 +362,7 @@
         },
         "responses": {
           "200": {
-            "description": "Usuario logado com sucesso",
+            "description": "Token gerado com sucesso",
             "content": {}
           }
         }
