@@ -10,12 +10,12 @@ const userSchema = new Schema ({
         unique: true
     },
 
-password: {
-    type: String,
-    required: [true, 'Senha não informada'],
-    trim: true,
-    select: false
-}
+    password: {
+        type: String,
+        required: [true, 'Senha não informada'],
+        trim: true,
+        select: false
+    }
 })
 
 

@@ -4,13 +4,13 @@ const balanceController = require('../controllers/balanceController');
 const autentica = require('../middleware/authMiddleware')
 const app = express();
 
-router.get('/saldo', autentica, balanceController.listarSaldo);
+router.get('/', autentica, balanceController.listarSaldo);
 
-router.get('/saldo/:id', autentica, balanceController.listarSaldoPorNome);
+router.get('/:id', autentica, balanceController.listarSaldoPorNome);
 
-router.put('/saldo/:id', autentica,balanceController.atualizarSaldo);
+router.put('/:id', autentica,balanceController.atualizarSaldo);
 
-router.post('/saldo', autentica, balanceController.criarSaldo);
+router.post('/', autentica, balanceController.criarSaldo);
 
 
 module.exports = router;

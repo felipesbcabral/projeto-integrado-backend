@@ -1,11 +1,12 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../config/env.json')
-async function registrar(req, res) {
+const config = require('../config/env.json');
 
+
+async function registrar(req, res) {
     const user = new User(req.body);
-    user.password = await bcrypt.hashSync(user.password, 8)
+    user.password = bcrypt.hashSync(user.password, 8)
     await user.save()
     .then(doc => {
         doc.password = undefined;
@@ -24,6 +25,7 @@ async function registrar(req, res) {
         return res.status(422).json(msg);
     }); 
 }
+
 async function login(req, res) {
     const {email, password} = req.body;
     await User.findOne({email}).select('+password')
